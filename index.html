@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Alumni Tracker Dashboard</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-50 font-sans">
+
+<div class="flex min-h-screen">
+
+<!-- Sidebar -->
+
+<div class="w-64 bg-white border-r">
+
+<div class="p-6 border-b">
+
+<h1 class="text-xl font-bold text-blue-600">
+AlumniTracker
+</h1>
+
+<p class="text-sm text-gray-400">
+Admin Dashboard
+</p>
+
+</div>
+
+<nav class="p-4 space-y-2">
+
+<a href="index.html"
+class="block px-4 py-2 rounded-lg bg-blue-50 text-blue-600 font-medium">
+Dashboard
+</a>
+
+<a href="alumni.html"
+class="block px-4 py-2 rounded-lg text-gray-600 hover:bg-gray-100">
+Data Alumni
+</a>
+
+</nav>
+
+</div>
+
+
+<!-- Main Content -->
+
+<div class="flex-1">
+
+<div class="bg-white border-b px-8 py-4 flex justify-between">
+
+<h2 class="text-lg font-semibold">
+Dashboard
+</h2>
+
+</div>
+
+<div class="p-8">
+
+
+<!-- Statistik -->
+
+<div class="grid grid-cols-3 gap-6">
+
+<div class="bg-white p-6 rounded-xl shadow-sm border">
+
+<p class="text-gray-400 text-sm">
+Total Alumni
+</p>
+
+<p id="totalAlumni" class="text-3xl font-bold mt-2">
+0
+</p>
+
+</div>
+
+
+<div class="bg-white p-6 rounded-xl shadow-sm border">
+
+<p class="text-gray-400 text-sm">
+Sudah Dilacak
+</p>
+
+<p id="trackedAlumni" class="text-3xl font-bold mt-2 text-green-600">
+0
+</p>
+
+</div>
+
+
+<div class="bg-white p-6 rounded-xl shadow-sm border">
+
+<p class="text-gray-400 text-sm">
+Belum Dilacak
+</p>
+
+<p id="untrackedAlumni" class="text-3xl font-bold mt-2 text-yellow-600">
+0
+</p>
+
+</div>
+
+</div>
+
+
+<!-- Tombol -->
+
+<div class="mt-8">
+
+<a href="alumni.html"
+class="bg-blue-600 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-700">
+
+Kelola Data Alumni
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<script src="script.js"></script>
+
+<script>
+
+fetch("http://localhost:3000/alumni")
+.then(res=>res.json())
+.then(data=>{
+
+document.getElementById("totalAlumni").innerText = data.length
+
+const tracked = data.filter(a => a.status === "Sudah Dilacak")
+document.getElementById("trackedAlumni").innerText = tracked.length
+
+const untracked = data.filter(a => a.status === "Belum Dilacak")
+document.getElementById("untrackedAlumni").innerText = untracked.length
+
+})
+
+</script>
+
+</body>
+</html>
